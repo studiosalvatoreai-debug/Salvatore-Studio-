@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salvatore Studio — Estratégia. Estética. Posicionamento.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: rgba(201,168,76,0.15);
+  --gold-border: rgba(201,168,76,0.2);
+  --bg: #070707;
+  --bg2: #0f0f0f;
+  --bg3: #161616;
+  --text: #F0EBE0;
+  --text-dim: rgba(240,235,224,0.5);
+  --text-muted: rgba(240,235,224,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
+
+/* Top gold line */
+.top-line {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold) 30%, var(--gold-light) 50%, var(--gold) 70%, transparent);
+  z-index: 100;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 2px; left: 0; right: 0;
+  background: rgba(7,7,7,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--gold-border);
+  z-index: 99;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 80% 20%, rgba(201,168,76,0.03) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 680px;
+}
+.hero-eyebrow {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 12vw, 96px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+.hero-studio {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 3vw, 22px);
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto 56px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.hero-cta:hover::before { transform: translateX(0); }
+.hero-cta:hover { color: #070707; }
+.hero-cta span { position: relative; z-index: 1; }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.4s;
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+.scroll-text {
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 64px;
+}
+.section-label {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold-border), transparent);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 7vw, 58px);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+
+/* SOBRE */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.about-text p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+.about-text p strong { color: var(--text); font-weight: 500; }
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.stat-card {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* PORTFÓLIO */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+.portfolio-card {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.portfolio-card:hover {
+  border-color: rgba(201,168,76,0.5);
+  transform: translateY(-2px);
+}
+.portfolio-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.portfolio-card:hover::after { opacity: 1; }
+.portfolio-tag {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  display: block;
+}
+.portfolio-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.portfolio-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* SERVIÇOS - tabs */
+.services-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--gold-border);
+  overflow-x: auto;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 14px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s;
+  margin-bottom: -1px;
+}
+.tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.tab-btn:hover { color: var(--text-dim); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Planos grid */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2px;
+}
+.plan-card {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  padding: 32px 28px;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.plan-card.featured {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, var(--bg3) 60%);
+}
+.plan-card.featured::before {
+  content: 'MAIS POPULAR';
+  position: absolute;
+  top: 16px; right: 16px;
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 4px 10px;
+}
+.plan-card:hover { border-color: rgba(201,168,76,0.45); }
+.plan-name {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+.plan-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.plan-price-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  display: block;
+}
+.plan-divider {
+  height: 1px;
+  background: var(--gold-border);
+  margin-bottom: 24px;
+}
+.plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.plan-features li {
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.plan-features li::before {
+  content: '—';
+  color: var(--gold);
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Serviços avulsos */
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2px;
+}
+.service-item {
+  background: var(--bg3);
+  border: 1px solid var(--gold-border);
+  padding: 24px 22px;
+  transition: border-color 0.3s;
+}
+.service-item:hover { border-color: rgba(201,168,76,0.4); }
+.service-item-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.service-item-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--gold);
+}
+.service-item-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Processo */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.process-step {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--gold-border);
+}
+.process-step:last-child { border-bottom: none; }
+.step-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+}
+.step-content-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+.step-content-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* CTA SECTION */
+.cta-section {
+  padding: 100px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+}
+.cta-section .section-title {
+  font-size: clamp(40px, 8vw, 72px);
+  margin-bottom: 20px;
+}
+.cta-section p {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 400px;
+  margin: 0 auto 48px;
+  line-height: 1.8;
+}
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--gold);
+  color: #070707;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 18px 44px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--gold-light); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  color: var(--text-dim);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  padding: 18px 44px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--gold-border);
+  padding: 48px 24px;
+  text-align: center;
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.footer-tagline {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .services-list { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-line"></div>
+
+<nav>
+  <div class="nav-brand">Salvatore Studio</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#portfolio">Clientes</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Estratégia · Estética · Posicionamento</div>
+    <h1 class="hero-name">Salvatore<br><em>Studio</em></h1>
+    <div class="hero-studio">Social Media &amp; IA</div>
+    <p class="hero-tagline">Arquitetura estratégica para marcas que desejam crescer com identidade, posicionamento e presença digital forte.</p>
+    <a href="https://wa.me/5579988770689?text=Olá! Vi seu link na bio e quero saber mais sobre os serviços do Salvatore Studio." class="hero-cta" target="_blank">
+      <span>Quero crescer minha marca</span>
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Role para ver</span>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <span class="section-label">Quem sou eu</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Luhh<br><em>Salvatore</em></h2>
+      <p>Fundadora da Salvatore Studio, especialista em <strong>posicionamento de marca</strong>, estratégia digital e criação de conteúdo.</p>
+      <p>Transformo perfis comuns em marcas estruturadas, com identidade, presença e direcionamento para <strong>crescimento e vendas reais</strong>.</p>
+      <p>Cada marca tem uma essência própria. Meu trabalho é traduzir essa essência em imagem, narrativa e resultado.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-card">
+        <div class="stat-number">13k+</div>
+        <div class="stat-label">Seguidores orgânicos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">54k</div>
+        <div class="stat-label">Visualizações / mês</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Clientes ativos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">IA</div>
+        <div class="stat-label">Tecnologia aplicada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section id="portfolio">
+  <div class="section-header reveal">
+    <span class="section-label">Portfólio</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal">Marcas que<br><em>estruturei</em></h2>
+  <br><br>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-card">
+      <span class="portfolio-tag">Moda Feminina · Aracaju</span>
+      <div class="portfolio-name">Flor D'Menina</div>
+      <p class="portfolio-desc">Gestão estratégica de Instagram, identidade visual, campanhas promocionais e criação de mascote 3D para boutique feminina no Shopping Box.</p>
+    </div>
+    <div class="portfolio-card">
+      <span class="portfolio-tag">Ótica · Aracaju</span>
+      <div class="portfolio-name">Ótica Mega Preço</div>
+      <p class="portfolio-desc">Reestruturação completa de comunicação digital, criação de mascote, campanhas sazonais e estratégia de conteúdo focada em conversão.</p>
+    </div>
+    <div class="portfolio-card">
+      <span class="portfolio-tag">Podologia & Estética</span>
+      <div class="portfolio-name">Carol Borges</div>
+      <p class="portfolio-desc">Identidade visual premium, campanhas de autocuidado, criação de conteúdo para redes sociais e estratégia de captação de clientes.</p>
+    </div>
+    <div class="portfolio-card">
+      <span class="portfolio-tag">Marketing Digital</span>
+      <div class="portfolio-name">Renato S. Mello</div>
+      <p class="portfolio-desc">Construção de autoridade digital para gestor de tráfego pago: identidade visual, sequência estratégica de conteúdo e posicionamento premium.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="section-header reveal">
+    <span class="section-label">Serviços</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal">O que eu<br><em>entrego</em></h2>
+  <br><br>
+
+  <div class="services-tabs reveal">
+    <button class="tab-btn active" onclick="switchTab('gestao')">Gestão Mensal</button>
+    <button class="tab-btn" onclick="switchTab('entrada')">Começo Estratégico</button>
+    <button class="tab-btn" onclick="switchTab('marca')">Marca &amp; Identidade</button>
+    <button class="tab-btn" onclick="switchTab('criativos')">Criativos &amp; IA</button>
+    <button class="tab-btn" onclick="switchTab('avulsos')">Avulsos</button>
+  </div>
+
+  <!-- GESTÃO -->
+  <div id="tab-gestao" class="tab-content active">
+    <div class="plans-grid">
+      <div class="plan-card">
+        <span class="plan-name">Nível I — Fundação Digital</span>
+        <div class="plan-price">R$420</div>
+        <span class="plan-price-label">por mês</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>8 posts mensais no feed</li>
+          <li>Stories 4x por semana</li>
+          <li>Calendário estratégico mensal</li>
+          <li>Copy persuasiva básica</li>
+          <li>Otimização de bio</li>
+          <li>Direcionamento para WhatsApp</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-name">Nível II — Consolidação</span>
+        <div class="plan-price">R$600</div>
+        <span class="plan-price-label">por mês</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>12 posts mensais</li>
+          <li>Stories 5x por semana</li>
+          <li>Planejamento mensal completo</li>
+          <li>Estratégia de captação orgânica</li>
+          <li>Copy focada em conversão</li>
+          <li>Análise básica de métricas</li>
+          <li>1 reunião online mensal</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Nível III — Autoridade</span>
+        <div class="plan-price">R$900</div>
+        <span class="plan-price-label">por mês</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>16 posts mensais</li>
+          <li>Stories diários estratégicos</li>
+          <li>Funil orgânico estruturado</li>
+          <li>Planejamento de campanhas</li>
+          <li>Copy avançada</li>
+          <li>Roteiros para vídeos</li>
+          <li>Relatório + reunião mensal</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Nível IV — Presencial</span>
+        <div class="plan-price">R$1.200</div>
+        <span class="plan-price-label">por mês · mín. 3 meses</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>20 posts mensais</li>
+          <li>Stories diários estruturados</li>
+          <li>1 sessão de captação presencial</li>
+          <li>Estratégia completa de vendas</li>
+          <li>Roteiros estratégicos</li>
+          <li>Relatório detalhado</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Nível V — Escala</span>
+        <div class="plan-price">R$1.800</div>
+        <span class="plan-price-label">por mês</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Gestão completa do Instagram</li>
+          <li>20 posts + stories diários</li>
+          <li>Funil orgânico de vendas</li>
+          <li>1 sessão de captação presencial</li>
+          <li>Reuniões quinzenais</li>
+          <li>Análise aprofundada de métricas</li>
+          <li>Ajustes estratégicos contínuos</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Nível VI — Domínio</span>
+        <div class="plan-price">R$2.500</div>
+        <span class="plan-price-label">por mês</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Gestão estratégica completa</li>
+          <li>24 posts mensais</li>
+          <li>Stories diários estratégicos</li>
+          <li>Funil orgânico completo</li>
+          <li>2 sessões de captação presencial</li>
+          <li>Reuniões quinzenais</li>
+          <li>Relatórios completos de performance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTRADA -->
+  <div id="tab-entrada" class="tab-content">
+    <div class="plans-grid">
+      <div class="plan-card">
+        <span class="plan-name">Análise de Instagram</span>
+        <div class="plan-price">R$150</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Diagnóstico completo do perfil</li>
+          <li>Pontos de melhoria</li>
+          <li>Análise de posicionamento</li>
+          <li>Estratégia prática entregue</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Consultoria Estratégica</span>
+        <div class="plan-price">R$150</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Reunião de até 1 hora</li>
+          <li>Direcionamento personalizado</li>
+          <li>Estratégia de conteúdo</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-name">Pack Análise + Consultoria</span>
+        <div class="plan-price">R$250</div>
+        <span class="plan-price-label">único · melhor custo-benefício</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Análise completa do perfil</li>
+          <li>Reunião estratégica</li>
+          <li>Plano de ação personalizado</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Bio Estratégica</span>
+        <div class="plan-price">R$60</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Reescrita profissional da bio</li>
+          <li>Ajuste para conversão</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Setup de Perfil</span>
+        <div class="plan-price">R$120</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Bio + destaques</li>
+          <li>Organização completa do perfil</li>
+          <li>Direcionamento visual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARCA -->
+  <div id="tab-marca" class="tab-content">
+    <div class="plans-grid">
+      <div class="plan-card featured">
+        <span class="plan-name">Estruturação Inicial</span>
+        <div class="plan-price">R$700</div>
+        <span class="plan-price-label">primeiro mês · base completa</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Logotipo profissional</li>
+          <li>Identidade visual completa</li>
+          <li>Paleta de cores e tipografia</li>
+          <li>Bio estratégica</li>
+          <li>Destaques personalizados</li>
+          <li>9 artes iniciais</li>
+          <li>Planejamento de posicionamento</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Mascote Imagem</span>
+        <div class="plan-price">R$50</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Criação de imagem do mascote</li>
+          <li>Arquivo em alta resolução</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Mascote Completo</span>
+        <div class="plan-price">R$200</div>
+        <span class="plan-price-label">único · 3–5 dias úteis</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Design personalizado exclusivo</li>
+          <li>3 poses diferentes</li>
+          <li>Arquivo em alta resolução</li>
+          <li>Aplicação para redes sociais</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Pack Mascote + Vídeo</span>
+        <div class="plan-price">R$350</div>
+        <span class="plan-price-label">combo</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Mascote personalizado</li>
+          <li>3 poses</li>
+          <li>Vídeo animado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRIATIVOS -->
+  <div id="tab-criativos" class="tab-content">
+    <div class="plans-grid">
+      <div class="plan-card">
+        <span class="plan-name">Vídeo com sua Imagem</span>
+        <div class="plan-price">R$150</div>
+        <span class="plan-price-label">até 48h após envio do tema</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Vídeo comercial até 24 segundos</li>
+          <li>Uso da logo na vestimenta</li>
+          <li>Comunicação estratégica</li>
+          <li>Copy pronta para postagem</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Vídeo IA Essencial</span>
+        <div class="plan-price">R$180</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Vídeo gerado com IA</li>
+          <li>Alta qualidade visual</li>
+          <li>Copy estratégica inclusa</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-name">Vídeo IA Estratégico</span>
+        <div class="plan-price">R$250</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Vídeo com direção visual</li>
+          <li>Narrativa estratégica</li>
+          <li>Copy + estratégia de postagem</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Pack 3 Vídeos IA</span>
+        <div class="plan-price">R$450</div>
+        <span class="plan-price-label">economia de R$300</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>3 vídeos com IA</li>
+          <li>Direção visual estratégica</li>
+          <li>Copy para cada vídeo</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Jingle Promocional</span>
+        <div class="plan-price">R$60</div>
+        <span class="plan-price-label">único</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>1 jingle personalizado curto</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Pack 2 Jingles</span>
+        <div class="plan-price">R$160</div>
+        <span class="plan-price-label">3–5 dias úteis</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Versão institucional</li>
+          <li>Versão promocional</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <span class="plan-name">Pack 4 Jingles</span>
+        <div class="plan-price">R$300</div>
+        <span class="plan-price-label">máximo impacto</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>4 jingles personalizados</li>
+          <li>Diferentes versões e fins</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-name">Combo Marca Completa</span>
+        <div class="plan-price">R$500</div>
+        <span class="plan-price-label">combo ideal para início</span>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Mascote personalizado</li>
+          <li>Vídeo com sua imagem</li>
+          <li>1 jingle</li>
+          <li>2 flyers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVULSOS -->
+  <div id="tab-avulsos" class="tab-content">
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-item-name">Flyer</div>
+        <div class="service-item-price">R$60–100</div>
+        <div class="service-item-desc">Arte promocional com copy</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Pack Flyers</div>
+        <div class="service-item-price">R$250</div>
+        <div class="service-item-desc">Conjunto de artes para campanha</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Post Avulso</div>
+        <div class="service-item-price">R$45</div>
+        <div class="service-item-desc">Arte + copy para feed</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Stories</div>
+        <div class="service-item-price">R$35</div>
+        <div class="service-item-desc">Sequência estratégica</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Roteiro de Vídeo</div>
+        <div class="service-item-price">R$60</div>
+        <div class="service-item-desc">Roteiro individual estratégico</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Copy</div>
+        <div class="service-item-price">R$50</div>
+        <div class="service-item-desc">Texto persuasivo avulso</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Captação 1h</div>
+        <div class="service-item-price">R$150</div>
+        <div class="service-item-desc">Fotos e vídeos presenciais</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Captação 2h</div>
+        <div class="service-item-price">R$250</div>
+        <div class="service-item-desc">Pack Essencial</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Captação 3h</div>
+        <div class="service-item-price">R$400</div>
+        <div class="service-item-desc">Pack Estratégico</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Captação 4h</div>
+        <div class="service-item-price">R$600</div>
+        <div class="service-item-desc">Pack Premium + direção</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Hora Extra</div>
+        <div class="service-item-price">R$80</div>
+        <div class="service-item-desc">Por hora adicional</div>
+      </div>
+      <div class="service-item">
+        <div class="service-item-name">Análise de Perfil</div>
+        <div class="service-item-price">R$250</div>
+        <div class="service-item-desc">Análise estratégica completa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="section-header reveal">
+    <span class="section-label">Como funciona</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal">O <em>processo</em></h2>
+  <br><br>
+  <div class="process-steps reveal">
+    <div class="process-step">
+      <div class="step-number">01</div>
+      <div>
+        <div class="step-content-title">Primeiro contato</div>
+        <div class="step-content-desc">Me chama no WhatsApp. Conversamos sobre o seu negócio, seus objetivos e o que está travando hoje.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">02</div>
+      <div>
+        <div class="step-content-title">Contrato formal</div>
+        <div class="step-content-desc">Todo serviço é realizado com contrato. Segurança para os dois lados. Início após pagamento de 50%.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">03</div>
+      <div>
+        <div class="step-content-title">Planejamento</div>
+        <div class="step-content-desc">Planejamento estratégico enviado em até 3 dias úteis após alinhamento inicial.</div>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">04</div>
+      <div>
+        <div class="step-content-title">Entrega e ajustes</div>
+        <div class="step-content-desc">Conteúdos entregues em até 7 dias úteis. Ajustes realizados em até 2 dias úteis após retorno.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="contato">
+  <div class="cta-bg"></div>
+  <div style="position:relative;z-index:2;">
+    <div class="section-header reveal" style="justify-content:center;margin-bottom:32px;">
+      <span class="section-label">Pronta para começar?</span>
+    </div>
+    <h2 class="section-title reveal">Vamos construir<br>sua <em>marca</em></h2>
+    <p class="reveal">Entre em contato agora e descubra qual estratégia faz mais sentido para o seu negócio.</p>
+    <div class="cta-buttons reveal">
+      <a href="https://wa.me/5579988770689?text=Olá! Vi seu link na bio e quero saber mais sobre os serviços do Salvatore Studio." class="btn-primary" target="_blank">
+        Falar no WhatsApp
+      </a>
+      <a href="https://instagram.com/salvatorestudio.oficial" class="btn-secondary" target="_blank">
+        Ver no Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Salvatore Studio</div>
+  <div class="footer-tagline">Estratégia · Estética · Posicionamento</div>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
